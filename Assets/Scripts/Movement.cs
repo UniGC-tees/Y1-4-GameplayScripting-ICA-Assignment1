@@ -12,6 +12,8 @@ public class Movement : MonoBehaviour
     private bool grappleLaunched = false;
     public int grapplePower = 1000;
     private Vector2 mousePosition;
+    private float highestPoint = -1000;
+    public GameObject scoreBar;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,7 +35,13 @@ public class Movement : MonoBehaviour
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
             grapple.transform.rotation = Quaternion.Slerp(grapple.transform.rotation, rotation, grapRotSpeed * Time.deltaTime);
-        } 
+        }
+
+        if (transform.position.y > highestPoint)
+        {
+            highestPoint = transform.position.y;
+            scoreBar.transform.position = new Vector3(scoreBar.transform.position.x, highestPoint, scoreBar.transform.position.z);
+        }
     }
 
     private void FixedUpdate()
