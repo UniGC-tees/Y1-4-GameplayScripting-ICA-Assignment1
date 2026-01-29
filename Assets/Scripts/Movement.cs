@@ -8,33 +8,34 @@ public class Movement : MonoBehaviour
 {
     private Rigidbody2D body;
     private Vector2 power;
-    public GameObject grapple;
     private bool grappleLaunched = false;
-    public int grapplePower = 1000;
     private Vector2 mousePosition;
     private float highestPoint = -1000;
     public GameObject scoreBar;
+    public Grapple assetGrapple;
+    private Grapple currentGrapple;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        SpawnGrapple();
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() //frames yo
     {
         if (!grappleLaunched) // only rotate grapple when its on the player obv
         {
             int grapRotSpeed = 20;
 
-            Vector2 direction = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - grapple.transform.position;
+            Vector2 direction = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - currentGrapple.transform.position; //cache this
 
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-            grapple.transform.rotation = Quaternion.Slerp(grapple.transform.rotation, rotation, grapRotSpeed * Time.deltaTime);
+            // ik its framerate dependant still ok..
+            currentGrapple.transform.rotation = Quaternion.Slerp(currentGrapple.transform.rotation, rotation, grapRotSpeed * Time.deltaTime);
         }
 
         if (transform.position.y > highestPoint)
@@ -51,13 +52,32 @@ public class Movement : MonoBehaviour
 
     public void OnMove(InputValue hey)
     {
-        power = (10*hey.Get<Vector2>());
+        power = (4*hey.Get<Vector2>());
     }
 
     public void OnAttack()
     {
+        if (grappleLaunched) return;
+        currentGrapple.GetComponent<Grapple>().Launch();
         grappleLaunched = true;
-        grapple.GetComponent<Rigidbody2D>().simulated = true;
-        grapple.GetComponent<Rigidbody2D>().AddForce(new Vector2 (grapple.transform.right.x, grapple.transform.right.y) * grapplePower);
+    }
+
+    public void SpawnGrapple()
+    {
+        currentGrapple = Instantiate(assetGrapple);
+        currentGrapple.transform.parent = transform;
+        currentGrapple.transform.localPosition = Vector3.zero;
+
+
+        Vector2 direction = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - currentGrapple.transform.position; //cache this
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        // ik its framerate dependant still ok..
+        currentGrapple.transform.rotation = rotation;
+
+
+        grappleLaunched = false;
     }
 }
