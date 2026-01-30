@@ -100,6 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2323754251062831285}
   - component: {fileID: 2142630547802812731}
+  - component: {fileID: 378366750127474754}
   - component: {fileID: 4579264195820039557}
   - component: {fileID: 3556369042869920016}
   - component: {fileID: 6032552720509094828}
@@ -138,9 +139,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e884611aba5a9a848b1475ae22a546e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
-  grapple: {fileID: 0}
   scoreBar: {fileID: 0}
   assetGrapple: {fileID: 8693845658011304662, guid: eabc8b425151dc7408211a1ae1287469, type: 3}
+--- !u!114 &378366750127474754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8433943026338160834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c303db0ca8922c4c8bc70e003d118fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WallBouncyness
 --- !u!50 &4579264195820039557
 Rigidbody2D:
   serializedVersion: 5

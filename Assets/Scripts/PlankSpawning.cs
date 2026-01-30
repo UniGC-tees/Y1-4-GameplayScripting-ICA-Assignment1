@@ -21,6 +21,6 @@ public class PlankSpawning : MonoBehaviour
 
     public void SpawnPlank()
     {
-        Instantiate(Plank, new Vector3(Random.Range(-8f, 8f), 5+transform.position.y, 0), Quaternion.identity);
+        Instantiate(Plank, new Vector3(Random.Range(-8f, 8f), 7+transform.position.y, 0), Quaternion.identity);
     }
 }

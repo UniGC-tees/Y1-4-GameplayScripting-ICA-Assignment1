@@ -99,8 +99,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4504168543481630982}
-  - component: {fileID: 6362068433127181474}
   - component: {fileID: 8693845658011304662}
+  - component: {fileID: 4502565467253748631}
+  - component: {fileID: 6362068433127181474}
   - component: {fileID: 7626709800329192423}
   m_Layer: 8
   m_Name: Grapple
@@ -125,6 +126,32 @@ Transform:
   - {fileID: 5360144071052604091}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8693845658011304662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5088340203442341879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49597391d2fdf544d9796cceff41424b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  launchPower: 16
+  flingPower: 3
+--- !u!114 &4502565467253748631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5088340203442341879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c303db0ca8922c4c8bc70e003d118fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WallBouncyness
 --- !u!50 &6362068433127181474
 Rigidbody2D:
   serializedVersion: 5
@@ -152,19 +179,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8693845658011304662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5088340203442341879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49597391d2fdf544d9796cceff41424b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  grapplePower: 16
 --- !u!61 &7626709800329192423
 BoxCollider2D:
   m_ObjectHideFlags: 0

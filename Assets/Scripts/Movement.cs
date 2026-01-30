@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -38,11 +39,19 @@ public class Movement : MonoBehaviour
             currentGrapple.transform.rotation = Quaternion.Slerp(currentGrapple.transform.rotation, rotation, grapRotSpeed * Time.deltaTime);
         }
 
-        if (transform.position.y > highestPoint)
+        if (transform.position.y > highestPoint) // move bar and stuff
         {
             highestPoint = transform.position.y;
             scoreBar.transform.position = new Vector3(scoreBar.transform.position.x, highestPoint, scoreBar.transform.position.z);
             scoreBar.GetComponent<PlankSpawning>().TrySpawnPlank();
+            scoreBar.GetComponent<ScoreTextUpdater>().UpdateText(highestPoint);
+        }
+
+        if (scoreBar.transform.position.y - transform.position.y > 5) // DIE!!!
+        {
+            UnityEngine.Debug.Log("so uh we died");
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
