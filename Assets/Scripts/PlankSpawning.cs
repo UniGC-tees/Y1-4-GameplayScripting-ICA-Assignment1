@@ -3,17 +3,24 @@ using UnityEngine;
 public class PlankSpawning : MonoBehaviour
 {
     public GameObject Plank;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private int sinceLastTry = 0;
+
+    public void TrySpawnPlank()
     {
-        for (int i = 0; i < 3; i++)
+        if (sinceLastTry > 30)
         {
-            Instantiate(Plank, new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f), 0), Quaternion.identity);
+            SpawnPlank();
+            sinceLastTry = 0;
+            return;
+        }
+        else
+        {
+            sinceLastTry++;
         }
     }
-    // Update is called once per frame
-    void Update()
+
+    public void SpawnPlank()
     {
-        
+        Instantiate(Plank, new Vector3(Random.Range(-8f, 8f), 5+transform.position.y, 0), Quaternion.identity);
     }
 }

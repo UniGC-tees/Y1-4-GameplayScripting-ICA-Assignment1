@@ -42,6 +42,7 @@ public class Movement : MonoBehaviour
         {
             highestPoint = transform.position.y;
             scoreBar.transform.position = new Vector3(scoreBar.transform.position.x, highestPoint, scoreBar.transform.position.z);
+            scoreBar.GetComponent<PlankSpawning>().TrySpawnPlank();
         }
     }
 
