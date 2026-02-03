@@ -13,7 +13,7 @@ public class Grapple : MonoBehaviour
         Debug.Log(playerRb);
 
         GetComponent<Rigidbody2D>().simulated = true;
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(transform.right.x, transform.right.y) * launchPower, ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().linearVelocity = new Vector2(transform.right.x, transform.right.y) * launchPower;
 
         Invoke(nameof(ResetArrow), 3);
     }
