@@ -10,10 +10,8 @@ public class ScoreTextUpdater : MonoBehaviour
         text = GetComponent<TextMeshPro>();
     }
 
-
-
     public void UpdateText(float score)
     {
-        text.text = ("score: " + score.ToString());
+        text.text = ("score: " + Mathf.Round(score).ToString());
     }
 }

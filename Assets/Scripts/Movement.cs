@@ -15,6 +15,10 @@ public class Movement : MonoBehaviour
     public GameObject scoreBar;
     public Grapple assetGrapple;
     private Grapple currentGrapple;
+    public GameObject ps;
+
+    bool once = false;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -50,8 +54,14 @@ public class Movement : MonoBehaviour
         if (scoreBar.transform.position.y - transform.position.y > 5) // DIE!!!
         {
             UnityEngine.Debug.Log("so uh we died");
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            
+            if (!once)
+            {
+                GameObject spawnedPartical = Instantiate(ps);
+                spawnedPartical.transform.position = transform.position + new Vector3(0,3,0);
+                once = true;
+                Invoke(nameof(ReloadScene), 1);
+            }
         }
     }
 
@@ -89,5 +99,10 @@ public class Movement : MonoBehaviour
 
 
         grappleLaunched = false;
+    }
+
+    private void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

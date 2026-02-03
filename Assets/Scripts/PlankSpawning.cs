@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlankSpawning : MonoBehaviour
 {
-    public GameObject Plank;
+    public GameObject [] plankTypes;
     private int sinceLastTry = 0;
 
     public void TrySpawnPlank()
@@ -21,6 +21,6 @@ public class PlankSpawning : MonoBehaviour
 
     public void SpawnPlank()
     {
-        Instantiate(Plank, new Vector3(Random.Range(-8f, 8f), 7+transform.position.y, 0), Quaternion.identity);
+        Instantiate(plankTypes[Random.Range(0,plankTypes.Length)], new Vector3(Random.Range(-8f, 8f), 7+transform.position.y, 0), Quaternion.identity);
     }
 }
