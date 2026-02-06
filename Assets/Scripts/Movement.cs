@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     public GameObject scoreBar;
     public Grapple assetGrapple;
     private Grapple currentGrapple;
-    public GameObject ps;
+    public ParticleSpawner pSpawner;
 
     bool once = false;
 
@@ -57,10 +57,10 @@ public class Movement : MonoBehaviour
             
             if (!once)
             {
-                GameObject spawnedPartical = Instantiate(ps);
-                spawnedPartical.transform.position = transform.position + new Vector3(0,3,0);
-                once = true;
-                Invoke(nameof(ReloadScene), 1);
+                ParticleSpawner spawnedPSpawner = Instantiate(pSpawner);
+                spawnedPSpawner.reloadsScene = true;
+                spawnedPSpawner.StartUpSpawning(0.5f);
+                Destroy(gameObject);
             }
         }
     }
@@ -99,10 +99,5 @@ public class Movement : MonoBehaviour
 
 
         grappleLaunched = false;
-    }
-
-    private void ReloadScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
