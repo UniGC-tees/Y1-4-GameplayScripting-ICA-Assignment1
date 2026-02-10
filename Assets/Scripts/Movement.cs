@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour
     public Grapple assetGrapple;
     private Grapple currentGrapple;
     public ParticleSpawner pSpawner;
-
+    private float deathLength = 3.3f;
     bool hasDied = false;
 
 
@@ -53,7 +53,7 @@ public class Movement : MonoBehaviour
             scoreBar.GetComponent<ScoreTextUpdater>().UpdateText(highestPoint);
         }
 
-        if (scoreBar.transform.position.y - transform.position.y > 5) // DIE!!!
+        if (scoreBar.transform.position.y - transform.position.y > deathLength) // DIE!!!
         {
             UnityEngine.Debug.Log("so uh we died");
             
@@ -62,8 +62,7 @@ public class Movement : MonoBehaviour
                 hasDied = true; // i dont need to even do this anymore
                 ParticleSpawner spawnedPSpawner = Instantiate(pSpawner);
                 spawnedPSpawner.reloadsScene = true;
-                spawnedPSpawner.StartUpSpawning(0.5f);
-                Destroy(gameObject);
+                spawnedPSpawner.StartUpSpawning(0.1f, gameObject);
             }
         }
     }
