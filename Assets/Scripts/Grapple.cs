@@ -5,6 +5,7 @@ public class Grapple : MonoBehaviour
     private Rigidbody2D playerRb;
     public int launchPower = 16;
     public float flingPower = 10f;
+    public AnimationCurve curve;
     public void Launch()
     {
         playerRb = transform.parent.GetComponent<Rigidbody2D>();
@@ -18,12 +19,16 @@ public class Grapple : MonoBehaviour
         Invoke(nameof(ResetArrow), 3);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) // pull player
     {
         GetComponent<Rigidbody2D>().simulated = false;
-        playerRb.linearVelocity = (transform.position - playerRb.transform.position)*flingPower;
-        Invoke(nameof(TellPlayerToSpawnGrapple), 0.5f);
-        Invoke(nameof(KillBrah), 2);
+
+        if (playerRb  != null) // incase the player is alr dead
+        {
+            playerRb.linearVelocity = new Vector3(curve.Evaluate(transform.position.x - playerRb.transform.position.x), curve.Evaluate(transform.position.y - playerRb.transform.position.y), curve.Evaluate(transform.position.z - playerRb.transform.position.z)) * flingPower;
+            Invoke(nameof(TellPlayerToSpawnGrapple), 0.5f);
+            Invoke(nameof(KillBrah), 2);
+        }
     }
 
     void KillBrah()
