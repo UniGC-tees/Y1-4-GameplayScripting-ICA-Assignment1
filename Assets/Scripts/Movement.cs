@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Rigidbody2D))]
+
 public class Movement : MonoBehaviour
 {
     private Rigidbody2D body;
@@ -17,7 +19,7 @@ public class Movement : MonoBehaviour
     private Grapple currentGrapple;
     public ParticleSpawner pSpawner;
 
-    bool once = false;
+    bool hasDied = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -55,8 +57,9 @@ public class Movement : MonoBehaviour
         {
             UnityEngine.Debug.Log("so uh we died");
             
-            if (!once)
+            if (!hasDied)
             {
+                hasDied = true; // i dont need to even do this anymore
                 ParticleSpawner spawnedPSpawner = Instantiate(pSpawner);
                 spawnedPSpawner.reloadsScene = true;
                 spawnedPSpawner.StartUpSpawning(0.5f);

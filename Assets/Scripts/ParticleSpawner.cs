@@ -25,7 +25,7 @@ public class ParticleSpawner : MonoBehaviour
     }
     public void StartUpSpawning(float seconds)
     {
-        SpawnParticleAfter(seconds);
+        StartCoroutine(SpawnParticleAfter(seconds));
     }
 
     private void ReloadScene()
