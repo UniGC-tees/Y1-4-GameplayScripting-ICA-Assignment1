@@ -21,7 +21,7 @@ public class Grapple : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GetComponent<Rigidbody2D>().simulated = false;
-        playerRb.linearVelocity = (transform.position - playerRb.transform.position)*flingPower;
+        if (playerRb != null) playerRb.linearVelocity = (transform.position - playerRb.transform.position) * flingPower;
         Invoke(nameof(TellPlayerToSpawnGrapple), 0.5f);
         Invoke(nameof(KillBrah), 2);
     }
@@ -33,7 +33,7 @@ public class Grapple : MonoBehaviour
 
     void TellPlayerToSpawnGrapple()
     {
-        playerRb.GetComponent<Movement>().SpawnGrapple();
+        if (playerRb != null) playerRb.GetComponent<Movement>().SpawnGrapple();
     }
 
     void ResetArrow()
